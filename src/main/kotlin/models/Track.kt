@@ -7,8 +7,8 @@ import java.time.Instant
 import java.util.*
 
 object Tracks : Table("tracks") {
-    val id = uuid("id").default(UUID.randomUUID())  // ✅ CON .default()
-    override val primaryKey = PrimaryKey(id)  // ✅
+    val id = uuid("id").default(UUID.randomUUID())
+    override val primaryKey = PrimaryKey(id)
 
     val title = varchar("title", 150)
     val duration = integer("duration").check { it greater 0 }

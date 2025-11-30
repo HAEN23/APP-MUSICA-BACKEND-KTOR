@@ -11,7 +11,7 @@ import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransacti
 
 object DatabaseFactory {
     fun init() {
-        // ✅ CONFIGURACIÓN POSTGRESQL
+
         val config = HikariConfig().apply {
             driverClassName = "org.postgresql.Driver"
             jdbcUrl = "jdbc:postgresql://localhost:5432/musica_db"

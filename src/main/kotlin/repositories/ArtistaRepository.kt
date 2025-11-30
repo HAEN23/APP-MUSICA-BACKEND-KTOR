@@ -43,7 +43,7 @@ class ArtistaRepository {
                 .count() > 0
 
         if (hasAlbumes) {
-            throw IllegalStateException("No se puede eliminar el artista porque tiene álbumes asociados")
+            throw IllegalStateException("No se puede eliminar el artista ")
         }
 
         val deleteCount = Artistas.deleteWhere { Artistas.id eq id }

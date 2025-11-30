@@ -7,7 +7,7 @@ import java.time.Instant
 import java.util.*
 
 object Albumes : Table("albumes") {
-    val id: Column<UUID> = uuid("id").default(UUID.randomUUID())  // ✅ AGREGAR .default()
+    val id: Column<UUID> = uuid("id").default(UUID.randomUUID())
     override val primaryKey = PrimaryKey(id)
 
     val title = varchar("title", 150)

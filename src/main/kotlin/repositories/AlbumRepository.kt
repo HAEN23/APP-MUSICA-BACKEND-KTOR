@@ -49,12 +49,12 @@ class AlbumRepository {
     }
 
     fun deleteAlbum(id: UUID): Boolean = transaction {
-        // Verificar si tiene tracks antes de borrar (protección contra borrado en cascada)
+
         val hasTracks = Musica.models.Tracks.select { Musica.models.Tracks.albumId eq id }
                 .count() > 0
 
         if (hasTracks) {
-            throw IllegalStateException("No se puede eliminar el álbum porque tiene tracks asociados")
+            throw IllegalStateException("No se puede eliminar el álbum ")
         }
 
         val deleteCount = Albumes.deleteWhere { Albumes.id eq id }
