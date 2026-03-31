@@ -1,43 +1,46 @@
-# jwt4
+#  App Música - Backend (API REST con Ktor)
 
-This project was created using the [Ktor Project Generator](https://start.ktor.io).
+Este repositorio contiene el código fuente del backend para una aplicación de gestión musical. Es una API RESTful desarrollada en **Kotlin** utilizando el framework **Ktor**, diseñada con una arquitectura limpia que separa los modelos de datos, la lógica de acceso (repositorios) y las rutas de la API.
 
-Here are some useful links to get you started:
+##  Características Principales
 
-- [Ktor Documentation](https://ktor.io/docs/home.html)
-- [Ktor GitHub page](https://github.com/ktorio/ktor)
-- The [Ktor Slack chat](https://app.slack.com/client/T09229ZC6/C0A974TJ9). You'll need to [request an invite](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) to join.
+* **Gestión de Artistas:** Endpoints para registrar, consultar y administrar información de artistas musicales.
+* **Gestión de Álbumes:** Relación y administración de los álbumes pertenecientes a los artistas.
+* **Gestión de Tracks (Pistas):** Control detallado de las canciones que componen cada álbum.
+* **Seguridad y Serialización:** Configuración integrada para el manejo de JSON y directivas de seguridad para la API.
+* **Patrón DTO:** Uso de *Data Transfer Objects* (DTOs) para aislar los modelos de la base de datos de los datos expuestos al cliente.
 
-## Features
+##  Tecnologías y Herramientas
 
-Here's a list of features included in this project:
+* **Lenguaje:** [Kotlin](https://kotlinlang.org/)
+* **Framework Backend:** [Ktor](https://ktor.io/)
+* **Gestor de Dependencias y Construcción:** Gradle (Kotlin DSL)
+* **Arquitectura:** Separación en capas (Rutas, Repositorios, DTOs, Modelos, Plugins).
 
-| Name                                                                   | Description                                                                        |
-| ------------------------------------------------------------------------|------------------------------------------------------------------------------------ |
-| [Authentication](https://start.ktor.io/p/auth)                         | Provides extension point for handling the Authorization header                     |
-| [Routing](https://start.ktor.io/p/routing)                             | Provides a structured routing DSL                                                  |
-| [Authentication JWT](https://start.ktor.io/p/auth-jwt)                 | Handles JSON Web Token (JWT) bearer authentication scheme                          |
-| [Content Negotiation](https://start.ktor.io/p/content-negotiation)     | Provides automatic content conversion according to Content-Type and Accept headers |
-| [kotlinx.serialization](https://start.ktor.io/p/kotlinx-serialization) | Handles JSON serialization using kotlinx.serialization library                     |
+## Estructura del Proyecto
 
-## Building & Running
+El código fuente principal se encuentra en `src/main/kotlin/` y está organizado de la siguiente manera:
 
-To build or run the project, use one of the following tasks:
+* `/models`: Contiene las entidades principales del dominio (`Artista.kt`, `Album.kt`, `Track.kt`).
+* `/dtos`: Objetos de Transferencia de Datos utilizados para mapear las peticiones y respuestas HTTP.
+* `/repositories`: Clases encargadas de encapsular la lógica de acceso y manipulación de la base de datos (`ArtistaRepository.kt`, etc.).
+* `/routes`: Definición de los endpoints de la API REST para cada entidad.
+* `/plugins`: Configuraciones clave del servidor Ktor, incluyendo:
+  * `Routing.kt`: Enrutamiento global.
+  * `Database.kt` / `DatabaseFactory.kt`: Conexión y configuración de la base de datos.
+  * `Security.kt`: Capa de seguridad y autenticación.
+  * `Serialization.kt`: Configuración para convertir objetos a JSON y viceversa.
+* `Application.kt`: Punto de entrada principal donde se inicializa el servidor Ktor.
 
-| Task                                    | Description                                                          |
-| -----------------------------------------|---------------------------------------------------------------------- |
-| `./gradlew test`                        | Run the tests                                                        |
-| `./gradlew build`                       | Build everything                                                     |
-| `./gradlew buildFatJar`                 | Build an executable JAR of the server with all dependencies included |
-| `./gradlew buildImage`                  | Build the docker image to use with the fat JAR                       |
-| `./gradlew publishImageToLocalRegistry` | Publish the docker image locally                                     |
-| `./gradlew run`                         | Run the server                                                       |
-| `./gradlew runDocker`                   | Run using the local docker image                                     |
+##  Requisitos Previos
 
-If the server starts successfully, you'll see the following output:
+Para ejecutar este proyecto en tu entorno local, necesitas:
 
-```
-2024-12-04 14:32:45.584 [main] INFO  Application - Application started in 0.303 seconds.
-2024-12-04 14:32:45.682 [main] INFO  Application - Responding at http://0.0.0.0:8080
-```
+1. Tener instalado el **Java Development Kit (JDK 11 o superior)**.
+2. Un entorno de desarrollo como **IntelliJ IDEA** (recomendado para Kotlin/Ktor).
+3. Una base de datos configurada (revisa `src/main/resources/application.conf` y `Database.kt` para las credenciales y el motor utilizado).
+
+##  Cómo compilar y ejecutar
+
+El proyecto utiliza el *Gradle Wrapper*, por lo que no necesitas tener Gradle instalado globalmente en tu sistema. Desde la terminal en la raíz del proyecto:
 
